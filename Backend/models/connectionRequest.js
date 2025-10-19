@@ -2,10 +2,14 @@ import mongoose from "mongoose"
 
 const connectionRequestSchema = new mongoose.Schema({
     fromUserId :{
-
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User" , 
+        required:true ,
     },
     toUserId:{
-
+        type:mongoose.Schema.Types.ObjectId , 
+        ref:"User" , 
+        required:true , 
     },
     status:{
         type:String, 
@@ -26,5 +30,5 @@ connectionRequestSchema.pre("save" , function(next){
     }
     next();
 })
-const User = mongoose.model("connectionRequest" , connectionRequestSchema);
-export default User ; 
+const connectionRequest = mongoose.model("connectionRequest" , connectionRequestSchema);
+export default connectionRequest ; 
