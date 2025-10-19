@@ -23,7 +23,7 @@ router.patch("/edit", userAuth, async (req, res) => {
     if (!validateProfileData(req)) {
       throw new Error("Please enter valid input ");
     }
-    console.log("Hello")
+    console.log("Hello");
     const loggedInUser = req.user;
     console.log(loggedInUser);
     Object.keys(req.body).forEach((key) => (loggedInUser[key] = req.body[key]));
@@ -34,7 +34,7 @@ router.patch("/edit", userAuth, async (req, res) => {
     res.status(400).json({
       success: false,
       message: "Internal server error",
-      error:error.message
+      error: error.message,
     });
   }
 });

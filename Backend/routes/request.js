@@ -6,13 +6,13 @@ const router = express.Router();
 
 router.post("/send/:status/:toUserId", userAuth, async (req, res) => {
   try {
-    console.log("Here we go")
+    console.log("Here we go");
     const fromUserId = req.user._id;
     const { toUserId } = req.params;
     const { status } = req.params;
-    console.log(fromUserId)
-    console.log(toUserId)
-    console.log(status)
+    console.log(fromUserId);
+    console.log(toUserId);
+    console.log(status);
     const allowedStatus = ["ignored", "interested"];
     if (!allowedStatus.includes(status)) {
       return res.status(400).json({
@@ -21,7 +21,7 @@ router.post("/send/:status/:toUserId", userAuth, async (req, res) => {
       });
     }
     const toUser = await User.findById(toUserId);
-    console.log(toUser)
+    console.log(toUser);
     if (!toUser) {
       res.status(404).json({
         success: false,
@@ -34,7 +34,7 @@ router.post("/send/:status/:toUserId", userAuth, async (req, res) => {
         { fromUserId: toUserId, toUserId: fromUserId },
       ],
     });
-    console.log(existingConnectionRequest)
+    console.log(existingConnectionRequest);
     if (existingConnectionRequest) {
       return res.status(400).json({
         message: "Connection Request Already Exists",
@@ -46,7 +46,7 @@ router.post("/send/:status/:toUserId", userAuth, async (req, res) => {
       status,
     });
     const data = await connectionReq.save();
-    console.log("This is the thing you have been waiting for:" , data)
+    console.log("This is the thing you have been waiting for:", data);
 
     res.json({
       message: req.user.firstName + "is" + status + "in" + toUser.firstName,
@@ -57,49 +57,45 @@ router.post("/send/:status/:toUserId", userAuth, async (req, res) => {
   }
 });
 
+router.post("/review/:status/:requestId", userAuth, async (req, res) => {
+  try {
+    const loggedInUser = req.user;
+    const { status, requestId } = req.params;
+    const allowedStatus = ["accepted", "rejected"];
 
-
-router.post("/review/:status/:requestId" , userAuth , async(req , res)=>{
-    try{
-        const loggedInUser = req.user ; 
-        const {status , requestId} = req.params;
-        const allowedStatus = ["accepted" , "rejected"];
-
-        if(!allowedStatus.includes(status)){
-           return res.status(400).json({
-                message:"Status not allowed"  
-            })
-        }
-
-        const ConnectionRequest = await connectionRequest.findOne({
-            _id:requestId , 
-            toUserId : loggedInUser._id ,
-            status:"interested",
-        })
-
-        if(!ConnectionRequest){
-            return res.status(404).json({
-                message:"Connection request not found"
-            })
-        }
-
-        ConnectionRequest.status = status ; 
-        const data = await ConnectionRequest.save();
-        res.json({
-            message:"Connection Request"+ status , data
-        })
+    if (!allowedStatus.includes(status)) {
+      return res.status(400).json({
+        message: "Status not allowed",
+      });
     }
-    catch(error){
-        res.status(400).json({
-            success:false , 
-            message:"Internal server error" , 
-            error:error.message
-        })
+
+    const ConnectionRequest = await connectionRequest.findOne({
+      _id: requestId,
+      toUserId: loggedInUser._id,
+      status: "interested",
+    });
+
+    if (!ConnectionRequest) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+        error: error.message,
+      });
     }
-})
 
+    ConnectionRequest.status = status;
+    const data = await ConnectionRequest.save();
+    res.json({
+      message: "Connection Request" + status,
+      data,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+});
 
-
-export default router ; 
-
-
+export default router;
