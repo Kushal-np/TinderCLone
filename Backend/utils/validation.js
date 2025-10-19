@@ -23,6 +23,6 @@ export const validateProfileData = (req) =>{
         "skills",
         "about"
     ]
-    const isEditAllowed = Object.keys(req.body).every((field)=>allowedFields.includes(field));
+    const isEditAllowed = Object.keys(req.body).every((field)=>allowedEditProfile.includes(field));
     return isEditAllowed ;    
 }

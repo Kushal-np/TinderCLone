@@ -6,7 +6,7 @@ export const generateTokenAndSetCookie = (userId , res)=>{
         expiresIn:"15d",
     })
 
-    res.cookie("JWT" , token , {
+    res.cookie("token" , token , {
         maxAge: 15*24*60*60*1000 , 
         httpsOnly:true , 
         sameSize: "lax" , 
