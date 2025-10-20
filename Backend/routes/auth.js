@@ -4,6 +4,7 @@ import { validateSignUpData } from "../utils/validation.js";
 import bcrypt from "bcryptjs"
 import User from "../models/user.js"
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
+import { userAuth } from "../middlewares/auth.js";
 router.post("/signup" , async(req , res)=>{
     try{
         console.log("So here we hit")
@@ -82,5 +83,18 @@ router.post("/logout" , async(req , res)=>{
         })
     }
 
+
+})
+
+router.get("/me" , userAuth, async(req , res)=>{
+    const me = req.user
+    res.status(200).json(me);
 })
 export default router ; 
+
+
+
+//68f3bb7b034d619a2c51de35 -> kush  "emailId": "Kushalpoude1l@gmail.com",
+
+
+//68f4b4e7a3942050c3658a5b -> arijit email id = arijit@gmail.com

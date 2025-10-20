@@ -1,7 +1,7 @@
 import express from "express"
-import { userAuth } from "../middlewares/auth";
-import connectionRequest from "../models/connectionRequest";
-import User from "../models/user";
+import { userAuth } from "../middlewares/auth.js";
+import connectionRequest from "../models/connectionRequest.js";
+import User from "../models/user.js";
 const router = express.Router();
 
 router.get("/requests/recieved" , userAuth , async(req , res)=>{
