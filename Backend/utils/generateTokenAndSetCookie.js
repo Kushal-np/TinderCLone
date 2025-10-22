@@ -7,7 +7,9 @@ export const generateTokenAndSetCookie = (userId , res)=>{
     })
 
 res.cookie("token", token, {
-  httpOnly: false,
+    domain:"https://sparko-seven.vercel.app/" , 
+    path:"/",
+  httpOnly: true,
   secure: true,
   sameSite: false, // important for cross-domain
   maxAge: 24*60*60*1000
