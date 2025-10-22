@@ -19,7 +19,6 @@ router.get("/view", userAuth, async (req, res) => {
 //View logic
 router.patch("/edit", userAuth, async (req, res) => {
   try {
-    console.log("Here we hit");
     if (!validateProfileData(req)) {
       throw new Error("Please enter valid input ");
     }
