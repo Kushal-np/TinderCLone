@@ -51,15 +51,18 @@ const userSchema = new mongoose.Schema({
     membershipType:{
         type:String , 
     },
-    photoUrl:{
-        type:String , 
-        default: "https://geographyandyou.com/images/user-profile.png",
-        validate(value){
-            if(!validator.isURL(value)){
-                throw new Error("Invalid photo url" + value);
-            }
+photoUrl: {
+    type: String,
+    default: "https://geographyandyou.com/images/user-profile.png",
+    validate(value) {
+        try {
+            new URL(value); // Will throw if invalid
+        } catch {
+            throw new Error("Invalid photo URL: " + value);
         }
-    },
+    }
+},
+
     about:{
         type:String, 
         default:"This is a default about of the user" , 
