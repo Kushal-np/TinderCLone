@@ -9,7 +9,7 @@ export const generateTokenAndSetCookie = (userId , res)=>{
 res.cookie("token", token, {
   httpOnly: true,
   secure: true,
-  sameSite: "None", // important for cross-domain
+  sameSite: false, // important for cross-domain
   maxAge: 24*60*60*1000
 });
 
