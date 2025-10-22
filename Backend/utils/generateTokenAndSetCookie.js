@@ -11,7 +11,7 @@ res.cookie("token", token, {
     path:"/",
   httpOnly: true,
   secure: true,
-  sameSite: false, // important for cross-domain
+  sameSite: 'None', // important for cross-domain
   maxAge: 24*60*60*1000
 });
 
