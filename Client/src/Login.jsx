@@ -10,7 +10,6 @@ const Login = () => {
   const [password , setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const handleLogin = async() =>{
     try{
     const res = await axios.post("http://localhost:7000/auth/login" , {
@@ -20,8 +19,8 @@ const Login = () => {
     })
     console.log(res.data);
     dispatch(addUser(res.data))
+    navigate("/")
     console.log(emailId , password)
-    navigate("/");
   }
     catch(error){
       console.log(error)

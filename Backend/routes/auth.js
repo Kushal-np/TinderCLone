@@ -73,6 +73,7 @@ router.post("/logout" , async(req , res)=>{
             maxAge:0 , 
             expires: new Date(Date.now())
         })
+
         res.send("Logout successfull");
     }
     catch(error){
