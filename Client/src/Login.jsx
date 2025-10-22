@@ -15,7 +15,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:7000/auth/login",
+        "https://tinderclone-1sxq.onrender.com/auth/login",
         { emailId, password },
         { withCredentials: true }
       );
