@@ -16,7 +16,7 @@ const PORT = process.env.PORT
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: "https://sparko-seven.vercel.app",
+  origin: "https://sparkoooo.onrender.com",
   credentials: true, 
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS" , "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"]

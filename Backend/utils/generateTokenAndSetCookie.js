@@ -7,8 +7,7 @@ export const generateTokenAndSetCookie = (userId , res)=>{
     })
 
 res.cookie("token", token, {
-    domain:"https://sparko-seven.vercel.app/" , 
-    path:"/",
+
   httpOnly: true,
   secure: true,
   sameSite: 'false', // important for cross-domain
